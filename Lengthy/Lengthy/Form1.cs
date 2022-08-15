@@ -83,7 +83,53 @@ namespace Lengthy
 
         private void menuCompile_Click(object sender, EventArgs e)
         {
+            Compiler comp = new Compiler();
+            string cCode = comp.convertToC(mainCodeEditor.Text);
 
+            /*
+            // THIS IS JUST A TEST TO SEE IF IT IS CONVERTING TO C CORRECTLY
+            mainCodeEditor.Text = temp;
+            */
+
+            Stream myStream;
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.Filter = "C files (*.c)|*.c";
+            saveFileDialog1.RestoreDirectory = true;
+            string fileName = "";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                if ((myStream = saveFileDialog1.OpenFile()) != null)
+                {
+                    fileName = saveFileDialog1.FileName;
+                    // Code to write the stream goes here.
+                    StreamWriter sw = new StreamWriter(myStream);
+                    sw.WriteLine(cCode);
+                    sw.Close();
+                    myStream.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                return;
+            }
+            //                 K <- to make not dissapear for testing
+            string command = "/C gcc \"" + fileName + "\" -o \"" + fileName.Substring(0, fileName.Length - 2) + "\"";
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = command;
+            process.StartInfo = startInfo;
+            process.Start();
+            process.WaitForExit();
+            File.Delete(fileName);
+            
         }
 
     }
