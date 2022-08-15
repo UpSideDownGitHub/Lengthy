@@ -1,0 +1,17 @@
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\bin\Debug\net6.0-windows\Lengthy.exe
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\bin\Debug\net6.0-windows\Lengthy.deps.json
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\bin\Debug\net6.0-windows\Lengthy.runtimeconfig.json
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\bin\Debug\net6.0-windows\Lengthy.dll
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\bin\Debug\net6.0-windows\Lengthy.pdb
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.csproj.AssemblyReference.cache
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.mainWindow.resources
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.csproj.GenerateResource.cache
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.AssemblyInfoInputs.cache
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.AssemblyInfo.cs
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.csproj.CoreCompileInputs.cache
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.dll
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\refint\Lengthy.dll
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.pdb
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\Lengthy.genruntimeconfig.cache
+C:\Users\reube\Documents\GitHub\Lengthy\Lengthy\Lengthy\obj\Debug\net6.0-windows\ref\Lengthy.dll
