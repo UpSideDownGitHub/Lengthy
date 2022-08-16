@@ -1,0 +1,78 @@
+1
+12
+123
+1234
+12345
+123456
+1234567
+12345678
+123456789
+1234567890
+12345678901
+123456789012
+1234567890123
+12345678901234
+123456789012345
+1234567890123456
+12345678901234567
+123456789012345678
+1234567890123456789
+12345678901234567890
+123456789012345678901
+1234567890123456789012
+12345678901234567890123
+123456789012345678901234
+1234567890123456789012345
+
+123456789012345678901 HelloThere
+
+
+
+
+
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int main()
+{
+    char string1 = "String1";
+    char string2 = "String2";
+    
+    int num1 = 10;
+    int num2 = 50;
+    
+    bool True = true;
+    bool False = false;
+    
+    if (True && True)
+    {
+        printf("HelloThere");   
+    }
+    if (True || False)
+    {
+        printf(String1);    
+    }
+    
+    while(num1 < num2)
+    {
+        
+    }
+    
+    printf("%d", 1);
+    printf("%d", num1);
+    
+    
+    
+    
+    
+    
+    return 0;
+}

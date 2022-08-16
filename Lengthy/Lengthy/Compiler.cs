@@ -32,6 +32,7 @@ namespace Lengthy
             { 15, "\nwhile"},
             { 16, "\n{\n"},
             { 17, "\n}\n"},
+            { 26, "="},
         };
 
         public string fixString(string stringToFix)
@@ -61,7 +62,7 @@ namespace Lengthy
 
             for (int i = 0; i < lenyCode.Length; i++)
             {
-                if (lenyCode[i].Length > 0 && lenyCode[i].Length <= 17)
+                if ((lenyCode[i].Length > 0 && lenyCode[i].Length <= 17) || lenyCode[i].Length == 26)
                 {
                     result += cConversions[lenyCode[i].Length];
                     continue;
@@ -123,6 +124,34 @@ namespace Lengthy
 
             result += "\ngetchar();\ngetchar();\nreturn 0;\n}";
 
+            return result;
+        }
+
+        public string convertToLengthy(string orignalCCode)
+        {
+
+            string[] cCode = orignalCCode.Split('\n', ' ');            
+            string result = "";
+
+
+            // FOR TESTING TO SEE WHERE THE CODE IS SPLIT AND SO HOW TO PROCESS THE CODE
+            for (int i = 0; i < cCode.Length; i++)
+            {
+                cCode[i] += "\r\n";
+                //result += cCode[i];  //FOR TESTING
+            }
+            for (int i = 0; i < cCode.Length; i++)
+            {
+                // check the special cases first
+                //print string variable
+                if (cCode[i].Contains("printf("))
+                {
+                    // set to 25
+                    result += "1234567890123456789012345 ";
+                    result += cCode[++i];
+                    result += "\r\n";
+                }
+            }
             return result;
         }
 

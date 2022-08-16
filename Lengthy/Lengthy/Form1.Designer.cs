@@ -37,6 +37,8 @@
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCompile = new System.Windows.Forms.ToolStripMenuItem();
+            this.macrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -55,7 +57,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.runToolStripMenuItem});
+            this.runToolStripMenuItem,
+            this.macrosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -76,28 +79,28 @@
             // menuNew
             // 
             this.menuNew.Name = "menuNew";
-            this.menuNew.Size = new System.Drawing.Size(128, 26);
+            this.menuNew.Size = new System.Drawing.Size(224, 26);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
             // 
             // menuOpen
             // 
             this.menuOpen.Name = "menuOpen";
-            this.menuOpen.Size = new System.Drawing.Size(128, 26);
+            this.menuOpen.Size = new System.Drawing.Size(224, 26);
             this.menuOpen.Text = "Open";
             this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
             // 
             // menuSave
             // 
             this.menuSave.Name = "menuSave";
-            this.menuSave.Size = new System.Drawing.Size(128, 26);
+            this.menuSave.Size = new System.Drawing.Size(224, 26);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(128, 26);
+            this.menuExit.Size = new System.Drawing.Size(224, 26);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 
@@ -112,9 +115,24 @@
             // menuCompile
             // 
             this.menuCompile.Name = "menuCompile";
-            this.menuCompile.Size = new System.Drawing.Size(148, 26);
+            this.menuCompile.Size = new System.Drawing.Size(224, 26);
             this.menuCompile.Text = "Compile";
             this.menuCompile.Click += new System.EventHandler(this.menuCompile_Click);
+            // 
+            // macrosToolStripMenuItem
+            // 
+            this.macrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cConverterToolStripMenuItem});
+            this.macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
+            this.macrosToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.macrosToolStripMenuItem.Text = "Macros";
+            // 
+            // cConverterToolStripMenuItem
+            // 
+            this.cConverterToolStripMenuItem.Name = "cConverterToolStripMenuItem";
+            this.cConverterToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cConverterToolStripMenuItem.Text = "C Converter";
+            this.cConverterToolStripMenuItem.Click += new System.EventHandler(this.cConverterToolStripMenuItem_Click);
             // 
             // mainWindow
             // 
@@ -144,5 +162,7 @@
         private ToolStripMenuItem menuExit;
         private ToolStripMenuItem runToolStripMenuItem;
         private ToolStripMenuItem menuCompile;
+        private ToolStripMenuItem macrosToolStripMenuItem;
+        private ToolStripMenuItem cConverterToolStripMenuItem;
     }
 }

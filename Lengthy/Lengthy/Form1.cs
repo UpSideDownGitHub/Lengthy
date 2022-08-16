@@ -132,5 +132,12 @@ namespace Lengthy
             
         }
 
+        Form2 secondForm = new Form2();
+        private void cConverterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (secondForm.IsDisposed)
+                secondForm = new Form2();  
+            secondForm.Show();
+        }
     }
 }
