@@ -86,10 +86,10 @@ namespace Lengthy
             Compiler comp = new Compiler();
             string cCode = comp.convertToC(mainCodeEditor.Text);
 
-            /*
+            ///*
             // THIS IS JUST A TEST TO SEE IF IT IS CONVERTING TO C CORRECTLY
-            mainCodeEditor.Text = temp;
-            */
+            mainCodeEditor.Text = cCode;
+            //*/
 
             Stream myStream;
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
