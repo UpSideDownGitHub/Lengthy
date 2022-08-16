@@ -34,6 +34,7 @@ namespace Lengthy
             { 17, "\r\nwhile"},
             { 18, "\r\n{\r\n"},
             { 19, "\r\n}\r\n"},
+            { 20, ";\r\n"},
         };
 
         public string fixString(string stringToFix)
@@ -73,61 +74,69 @@ namespace Lengthy
                     result += lenyCode[i];
                     continue;
                 }
-                if ((lenyCode[i].Length > 0 && lenyCode[i].Length <= 19))
+                if ((lenyCode[i].Length > 0 && lenyCode[i].Length <= 20))
                 {
                     result += cConversions[lenyCode[i].Length];
+                    // NEED TO CHECK IF THE NEXT ONE IS A NUMBER THEN IF IT IS THEN JUST ADD IT TO THE
+                    int num;
+                    bool isNum = int.TryParse(lenyCode[i + 1], out num);
+                    if (isNum)
+                    {
+                        result += lenyCode[i + 1];
+                        i++;
+                    }
                     continue;
                 }
                 switch (lenyCode[i].Length)
                 {
                     // create string
-                    case 20:
-                        result += ("\r\nchar " + lenyCode[i+1] + "[] = \"" + lenyCode[i+2] + "\";");
+                    case 21:
+                        result += ("\r\nchar " + lenyCode[i+1] + "[] = \"" + lenyCode[i+2] + "\";\r\n");
                         varaibles.Add(lenyCode[i + 1]);  
                         i++;
                         i++;
                         break;
                     // create number
-                    case 21:
-                        result += ("\r\nint " + lenyCode[i + 1] + " = " + lenyCode[i + 2] + ";");
+                    case 22:
+                        result += ("\r\nint " + lenyCode[i + 1] + " = " + lenyCode[i + 2] + ";\r\n");
                         varaibles.Add(lenyCode[i + 1]);
                         i++;
                         i++;
                         break;
                     // create bool
-                    case 22:
-                        result += ("\r\nbool " + lenyCode[i + 1] + " = " + lenyCode[i + 2] + ";");
+                    case 23:
+                        result += ("\r\nbool " + lenyCode[i + 1] + " = " + lenyCode[i + 2] + ";\r\n");
                         varaibles.Add(lenyCode[i + 1]);
                         i++;
                         i++;
                         break;
                     // print string
-                    case 23:
-                        result += ("\r\nprintf(\"" + lenyCode[i + 1] + "\");");
-                        result += ("\r\nprintf(\"\\n\");");
+                    case 24:
+                        result += ("\r\nprintf(\"" + lenyCode[i + 1] + "\");\r\n");
+                        result += ("printf(\"\\n\");\r\n");
                         i++;
                         break;
                     // print string (variable)
-                    case 24:
-                        result += ("\r\nprintf(" + lenyCode[i + 1] + ");");
-                        result += ("\r\nprintf(\"\\n\");");
+                    case 25:
+                        result += ("\r\nprintf(" + lenyCode[i + 1] + ");\r\n");
+                        result += ("printf(\"\\n\");\r\n");
                         i++;
                         break;
                     // print number
-                    case 25:
-                        result += ("\r\nprintf(\"%d\", " + lenyCode[i+1] + ");");
-                        result += ("\r\nprintf(\"\\n\");");
+                    case 26:
+                        result += ("\r\nprintf(\"%d\", " + lenyCode[i+1] + ");\r\n");
+                        result += ("printf(\"\\n\");\r\n");
                         i++;
                         break;
                     // input string
-                    case 26:
-                        result += ("\r\ngets(" + lenyCode[i + 1] + ");");// +
+                    case 27:
+                        result += ("\r\ngets(" + lenyCode[i + 1] + ");\r\n");// +
                             //"\r\ngetch();");
                         i++;
                         break;
                     // input number
-                    case 27:
-                        result += ("\r\nscanf(\"%d\", &" + lenyCode[i + 1] + ");");// +
+                    case 28:
+                        result += ("\r\nscanf(\"%d\", &" + lenyCode[i + 1] + ");\r\n");// +
                             //"\r\ngetch();");
                         i++;
                         break;
