@@ -77,13 +77,17 @@ namespace Lengthy
                 if ((lenyCode[i].Length > 0 && lenyCode[i].Length <= 20))
                 {
                     result += cConversions[lenyCode[i].Length];
-                    // NEED TO CHECK IF THE NEXT ONE IS A NUMBER THEN IF IT IS THEN JUST ADD IT TO THE
-                    int num;
-                    bool isNum = int.TryParse(lenyCode[i + 1], out num);
-                    if (isNum)
+
+                    if (i + 1 < lenyCode.Length)
                     {
-                        result += lenyCode[i + 1];
-                        i++;
+                        // check if there is a number after the sign
+                        int num;
+                        bool isNum = int.TryParse(lenyCode[i + 1], out num);
+                        if (isNum)
+                        {
+                            result += lenyCode[i + 1];
+                            i++;
+                        }
                     }
                     continue;
                 }
@@ -91,8 +95,8 @@ namespace Lengthy
                 {
                     // create string
                     case 21:
-                        result += ("\r\nchar " + lenyCode[i+1] + "[] = \"" + lenyCode[i+2] + "\";\r\n");
-                        varaibles.Add(lenyCode[i + 1]);  
+                        result += ("\r\nchar " + lenyCode[i + 1] + "[] = \"" + lenyCode[i + 2] + "\";\r\n");
+                        varaibles.Add(lenyCode[i + 1]);
                         i++;
                         i++;
                         break;
@@ -124,20 +128,20 @@ namespace Lengthy
                         break;
                     // print number
                     case 26:
-                        result += ("\r\nprintf(\"%d\", " + lenyCode[i+1] + ");\r\n");
+                        result += ("\r\nprintf(\"%d\", " + lenyCode[i + 1] + ");\r\n");
                         result += ("printf(\"\\n\");\r\n");
                         i++;
                         break;
                     // input string
                     case 27:
                         result += ("\r\ngets(" + lenyCode[i + 1] + ");\r\n");// +
-                            //"\r\ngetch();");
+                                                                             //"\r\ngetch();");
                         i++;
                         break;
                     // input number
                     case 28:
                         result += ("\r\nscanf(\"%d\", &" + lenyCode[i + 1] + ");\r\n");// +
-                            //"\r\ngetch();");
+                                                                                       //"\r\ngetch();");
                         i++;
                         break;
                     default:
@@ -150,31 +154,142 @@ namespace Lengthy
             return result;
         }
 
+        public string fixString2(string stringToFix)
+        {
+            if (string.IsNullOrEmpty(stringToFix))
+                return stringToFix;
 
-
-
-
-
-
-
-
-
-
-
+            StringBuilder sb = new StringBuilder();
+            foreach (var c in stringToFix)
+            {
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || /*c == '\n' ||*/ c == ' ' ||
+                    c == '(' || c == ')' || c == '=' || c == '+' || c == '-' || c == '/' || c == '*' || c == '&' || c == '|' ||
+                    c == '>' || c == '<' || c == '{' || c == '}' || c == '"' || c == '%' || c == '\\' || c == ';' || c == ',' ||
+                    c == '[' || c == ']')
+                    sb.Append(c);
+            }
+            return sb.ToString();
+        }
 
         public string convertToLengthy(string orignalCCode)
         {
+            // split the code at each line (;) then convert each line at a time in a loop that means that by the
+            // end of the line you know you are finished and dont have to do any fancy footwork
 
-            string[] cCode = orignalCCode.Split('\n', ' ');            
+            // fix the string to only contain the nececary parts and remove and whitespace
+            orignalCCode = fixString2(orignalCCode);
+
+            // split code into lines and create result where the lengthy code will be stored
+            string[] cCode = orignalCCode.Split('\n', ';');
             string result = "";
 
-
-            // FOR TESTING TO SEE WHERE THE CODE IS SPLIT AND SO HOW TO PROCESS THE CODE
             for (int i = 0; i < cCode.Length; i++)
             {
-                cCode[i] += "\r\r\n";
-                //result += cCode[i];  //FOR TESTING
+                result += cCode[i];
+                result += "\r\n";
             }
+            
+            // loop though all of the lines of code
+            for (int i = 0; i < cCode.Length; i++)
+            {
+                // split the current line into its commands and process them one by one
+                var commands = cCode[i].Split(' ');
+                for (int j = 0; j < commands.Length; j++)
+                {
+                    // create string
+                    // char NAME[] = "STRING";
+                    if (commands[j].Equals("char"))
+                    {
+                        // char
+                        result += "123456789012345678901 ";
+                        // NAME[]
+                        result += commands[j + 1].Substring(0, commands[j + 1].Length - 2);
+                        // = (placed automatically but need a space)
+                        result += " ";
+                        // "STRING";
+                        result += commands[j + 3].Substring(1, commands[j + 3].Length - 2);
+                        j += 3;
+                    }
+                    // create number
+                    // int NAME = NUMBER;
+                    else if (commands[j].Equals("int"))
+                    {
+                        // int
+                        result += "1234567890123456789012 ";
+                        // NAME
+                        result += commands[j + 1].Substring(0, commands[j + 1].Length);
+                        // = (placed automatically but need a space)
+                        result += " ";
+                        // NUMBER
+                        result += commands[j + 3].Substring(0, commands[j + 3].Length);
+                        j += 3;
+                    }
+                    // create bool
+                    // bool NAME = VALUE;
+                    else if (commands[j].Equals("bool"))
+                    {
+                        // bool
+                        result += "12345678901234567890123 ";
+                        // NAME
+                        result += commands[j + 1].Substring(0, commands[j + 1].Length);
+                        // = (placed automatically but need a space)
+                        result += " ";
+                        // NUMBER
+                        result += commands[j + 3].Substring(0, commands[j + 3].Length);
+                        j += 3;
+                    }
+                    // print number
+                    // printf("%d", NUMBER);
+                    else if (commands[j].Equals("printf(\"%d\","))
+                    {
+                        // printf("%d"
+                        result += "12345678901234567890123456 ";
+                        // NUMBER
+                        result += commands[j + 1].Substring(0, commands[j + 1].Length - 1);
+                        j += 1;
+                    }
+                    // print string
+                    // printf("STRING");
+                    else if (commands[j].Contains("printf(\""))
+                    {
+                        // printf
+                        result += "123456789012345678901234 ";
+                        // STRING
+                        result += commands[j].Substring(8, commands[j].Length - 2 - 8);
+                    }
+                    // print string (variable)
+                    // printf(VARNAME);
+                    else if (commands[j].Contains("printf("))
+                    {
+                        // printf
+                        result += "1234567890123456789012345 ";
+                        // VARNAME
+                        result += commands[j].Substring(7, commands[j].Length - 1 - 7);
+                    }
+                    // input string
+                    // gets(STRVAR);
+                    else if (commands[j].Contains("gets("))
+                    {
+                        // gets
+                        result += "123456789012345678901234567 ";
+                        // STRVAR
+                        result += commands[j].Substring(5, commands[j].Length - 1 - 5);
+                    }
+                    // input number
+                    // scanf("%d", &NUMVAR);
+                    else if (commands[j].Equals("scanf(\"%d\","))
+                    {
+                        // scanf("%d",
+                        result += "1234567890123456789012345678 ";
+                        // NUMVAR
+                        result += commands[j + 1].Substring(1, commands[j + 1].Length - 1 - 1);
+                        j += 1;
+                    }
+                }
+                result += "\r\n";
+            }
+
+            /*
             for (int i = 0; i < cCode.Length; i++)
             {
                 // check the special cases first
@@ -187,8 +302,8 @@ namespace Lengthy
                     result += "\r\r\n";
                 }
             }
+            */
             return result;
         }
-
     }
 }
