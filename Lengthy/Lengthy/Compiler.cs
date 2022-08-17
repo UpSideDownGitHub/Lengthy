@@ -36,6 +36,60 @@ namespace Lengthy
             { 19, "\r\n}\r\n"},
             { 20, ";\r\n"},
         };
+        List<string> lengthyConversionsSingle = new List<string>()
+        {
+            "(",
+            ")",
+            "if",
+            "while",
+            "{",
+            "}",
+            ";"
+        };
+        List<string> lengthyConversionsSingleNumbers = new List<string>()
+        {
+            "1 ",
+            "12 ",
+            "1234567890123456 ",
+            "12345678901234567 ",
+            "123456789012345678 ",
+            "1234567890123456789 ",
+            "12345678901234567890 "
+        };
+
+        List<string> lengthyConversionsDouble = new List<string>()
+        {
+            "=",
+            "+",
+            "-",
+            "/",
+            "*",
+            "&&",
+            "||",
+            ">",
+            "<",
+            "==",
+            ">=",
+            "<=",
+            "!=",
+        };
+        List<string> lengthyConversionsDoubleNumbers = new List<string>()
+        {
+            "123 ",
+            "1234 ",
+            "12345 ",
+            "123456 ",
+            "1234567 ",
+            "12345678 ",
+            "123456789 ",
+            "1234567890 ",
+            "12345678901 ",
+            "123456789012 ",
+            "1234567890123 ",
+            "12345678901234 ",
+            "123456789012345 "
+        };
+
 
         public string fixString(string stringToFix)
         {
@@ -45,9 +99,7 @@ namespace Lengthy
             StringBuilder sb = new StringBuilder();
             foreach (var c in stringToFix)
             {
-                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '\n' || c == ' ')// ||           ME BEING STUPID BUT MIGHT END UP
-                    //c == '(' || c == ')' || c == '=' || c == '+' || c == '-' || c == '/' || c == '*' || c == '&' || c == '|' ||       NEEDING LATER SO NOT REMOVED
-                    //c == '>' || c == '<')
+                if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c == '\n' || c == ' ')
                     sb.Append(c);
             }
             return sb.ToString();
@@ -87,6 +139,23 @@ namespace Lengthy
                         {
                             result += lenyCode[i + 1];
                             i++;
+                            try
+                            {
+                                if (i + 1 == lenyCode.Length)
+                                {
+                                    result += ";\r\n";
+                                    continue;
+                                }
+                                //result += "\r\n Value: " + lenyCode[i + 2] + "\r\n \r\n";
+                                if (!(lenyCode[i + 1].Length > 0 && lenyCode[i + 1].Length <= 20) || varaibles.Contains(lenyCode[i + 1]))
+                                {
+                                    result += ";\r\n";
+                                }
+                            }
+                            catch
+                            {
+                                result += "ERROR";
+                            }
                         }
                     }
                     continue;
@@ -134,14 +203,12 @@ namespace Lengthy
                         break;
                     // input string
                     case 27:
-                        result += ("\r\ngets(" + lenyCode[i + 1] + ");\r\n");// +
-                                                                             //"\r\ngetch();");
+                        result += ("\r\ngets(" + lenyCode[i + 1] + ");\r\n");
                         i++;
                         break;
                     // input number
                     case 28:
-                        result += ("\r\nscanf(\"%d\", &" + lenyCode[i + 1] + ");\r\n");// +
-                                                                                       //"\r\ngetch();");
+                        result += ("\r\nscanf(\"%d\", &" + lenyCode[i + 1] + ");\r\n");
                         i++;
                         break;
                     default:
@@ -171,6 +238,8 @@ namespace Lengthy
             return sb.ToString();
         }
 
+        public List<string> cVaraibles = new List<string>();
+
         public string convertToLengthy(string orignalCCode)
         {
             // split the code at each line (;) then convert each line at a time in a loop that means that by the
@@ -188,7 +257,7 @@ namespace Lengthy
                 result += cCode[i];
                 result += "\r\n";
             }
-            
+
             // loop though all of the lines of code
             for (int i = 0; i < cCode.Length; i++)
             {
@@ -196,6 +265,30 @@ namespace Lengthy
                 var commands = cCode[i].Split(' ');
                 for (int j = 0; j < commands.Length; j++)
                 {
+                    // check to see if the selected command is a single command
+                    // command == single (nothing needed after)
+                    bool exists = lengthyConversionsSingle.Exists(element => element == commands[j]);
+                    if (exists)
+                    {
+                        // Select the lengthy code from list
+                        int index = lengthyConversionsSingle.FindIndex(element => element == commands[j]);
+                        result += lengthyConversionsSingleNumbers[index];
+                        continue;
+                    }
+                    // command == double (var/val needed after)
+                    exists = lengthyConversionsDouble.Exists(element => element == commands[j]);
+                    if (exists)
+                    {
+                        // Select the lengthy code from list
+                        int index = lengthyConversionsDouble.FindIndex(element => element == commands[j]);
+                        result += lengthyConversionsDoubleNumbers[index];
+                        result += commands[j + 1];
+                        result += " ";
+                        j++;
+                        continue;
+                    }
+
+                    // check to see if the selected command is a special command (create, print, input)
                     // create string
                     // char NAME[] = "STRING";
                     if (commands[j].Equals("char"))
@@ -203,7 +296,9 @@ namespace Lengthy
                         // char
                         result += "123456789012345678901 ";
                         // NAME[]
-                        result += commands[j + 1].Substring(0, commands[j + 1].Length - 2);
+                        var name = commands[j + 1].Substring(0, commands[j + 1].Length - 2);
+                        cVaraibles.Add(name);
+                        result += name;
                         // = (placed automatically but need a space)
                         result += " ";
                         // "STRING";
@@ -217,7 +312,9 @@ namespace Lengthy
                         // int
                         result += "1234567890123456789012 ";
                         // NAME
-                        result += commands[j + 1].Substring(0, commands[j + 1].Length);
+                        var name = commands[j + 1].Substring(0, commands[j + 1].Length);
+                        cVaraibles.Add(name);
+                        result += name;
                         // = (placed automatically but need a space)
                         result += " ";
                         // NUMBER
@@ -231,7 +328,9 @@ namespace Lengthy
                         // bool
                         result += "12345678901234567890123 ";
                         // NAME
-                        result += commands[j + 1].Substring(0, commands[j + 1].Length);
+                        var name = commands[j + 1].Substring(0, commands[j + 1].Length);
+                        cVaraibles.Add(name);
+                        result += name;
                         // = (placed automatically but need a space)
                         result += " ";
                         // NUMBER
@@ -285,24 +384,16 @@ namespace Lengthy
                         result += commands[j + 1].Substring(1, commands[j + 1].Length - 1 - 1);
                         j += 1;
                     }
+                    // check to see if a variable
+                    else if (cVaraibles.Contains(commands[j]))
+                    {
+                        // Variable
+                        result += commands[j];
+                        result += " ";
+                    }
                 }
                 result += "\r\n";
             }
-
-            /*
-            for (int i = 0; i < cCode.Length; i++)
-            {
-                // check the special cases first
-                //print string variable
-                if (cCode[i].Contains("printf("))
-                {
-                    // set to 25
-                    result += "1234567890123456789012345 ";
-                    result += cCode[++i];
-                    result += "\r\r\n";
-                }
-            }
-            */
             return result;
         }
     }
