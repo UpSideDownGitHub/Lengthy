@@ -252,11 +252,13 @@ namespace Lengthy
             string[] cCode = orignalCCode.Split('\n', ';');
             string result = "";
 
+            /*
             for (int i = 0; i < cCode.Length; i++)
             {
                 result += cCode[i];
                 result += "\r\n";
             }
+            */
 
             // loop though all of the lines of code
             for (int i = 0; i < cCode.Length; i++)
