@@ -90,7 +90,10 @@ namespace Lengthy
             "123456789012345 "
         };
 
-
+        /*
+         * used to fix the orignal leny code and remove any unecesary characters that have made there way in
+         * then return the cleaned string back to convertToC() function so the leny code can be converted to C
+         */
         public string fixString(string stringToFix)
         {
             if (string.IsNullOrEmpty(stringToFix))
@@ -109,6 +112,7 @@ namespace Lengthy
 
         public string convertToC(string orignalLenyCode)
         {
+            // convert the leny code to C and create the initial C document
             orignalLenyCode = fixString(orignalLenyCode);
             string[] lenyCode = orignalLenyCode.Split('\n', ' ');
             string result = "";
@@ -120,38 +124,47 @@ namespace Lengthy
 
             for (int i = 0; i < lenyCode.Length; i++)
             {
+                // Variables
                 if (varaibles.Contains(lenyCode[i]))
                 {
-                    // VARIABLE SO JUST ADD THE VATIABLE TO RESULT
+                    // add variable to the lennyCode
                     result += lenyCode[i];
                     continue;
                 }
+                // Simple instruction (+,-,/,...)
                 if ((lenyCode[i].Length > 0 && lenyCode[i].Length <= 20))
                 {
+                    // add the simple instruction to the code
                     result += cConversions[lenyCode[i].Length];
 
+                    // if there could be a number after
                     if (i + 1 < lenyCode.Length)
                     {
-                        // check if there is a number after the sign
                         int num;
                         bool isNum = int.TryParse(lenyCode[i + 1], out num);
+                        // number after the instruction
                         if (isNum)
                         {
+                            // add the number to the final code
                             result += lenyCode[i + 1];
                             i++;
+                            // try and check if there is more instrunction after that
                             try
                             {
+                                // reached the end of the instruction
                                 if (i + 1 == lenyCode.Length)
                                 {
                                     result += ";\r\n";
                                     continue;
                                 }
-                                //result += "\r\n Value: " + lenyCode[i + 2] + "\r\n \r\n";
+                                // start a new line if there is a instruction that is not connect to the previous
                                 if (!(lenyCode[i + 1].Length > 0 && lenyCode[i + 1].Length <= 20) || varaibles.Contains(lenyCode[i + 1]))
                                 {
                                     result += ";\r\n";
                                 }
                             }
+                            // return the error (used a sumple instruciton with no value)
+                            // E.G. 1 + 2 +; - this is an error
                             catch
                             {
                                 result += "ERROR";
@@ -160,6 +173,7 @@ namespace Lengthy
                     }
                     continue;
                 }
+                // advanced instructions
                 switch (lenyCode[i].Length)
                 {
                     // create string
@@ -216,19 +230,31 @@ namespace Lengthy
                 }
             }
 
+            // adds end of program characters to the window does not instantly close
             result += "\r\ngetchar();\r\ngetchar();\r\nreturn 0;\r\n}";
 
+            // returns the converted lengthy code
             return result;
         }
 
+        /*
+         * used by the convertToLengthy() method to clean the orignalCCode so that it can be correctly converted to 
+         * lengthy code
+         */
         public string fixString2(string stringToFix)
         {
+            // if there is no string then dont need to do anything so return
             if (string.IsNullOrEmpty(stringToFix))
                 return stringToFix;
 
+            // create a new string builder varaible that i can then add the cleaned string to
             StringBuilder sb = new StringBuilder();
+
+            // for each of the elements of the string
             foreach (var c in stringToFix)
             {
+                // if is an accepted character then add to the StringBuilder and if not then remove the variable
+                // Note: this step is mostly done to remove invisable characters and special characters
                 if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || /*c == '\n' ||*/ c == ' ' ||
                     c == '(' || c == ')' || c == '=' || c == '+' || c == '-' || c == '/' || c == '*' || c == '&' || c == '|' ||
                     c == '>' || c == '<' || c == '{' || c == '}' || c == '"' || c == '%' || c == '\\' || c == ';' || c == ',' ||
@@ -240,25 +266,17 @@ namespace Lengthy
 
         public List<string> cVaraibles = new List<string>();
 
+        /*
+         * converts the accepted C code to lengthy code that can then be used in the main window to be compiled and ran
+         */
         public string convertToLengthy(string orignalCCode)
         {
-            // split the code at each line (;) then convert each line at a time in a loop that means that by the
-            // end of the line you know you are finished and dont have to do any fancy footwork
-
             // fix the string to only contain the nececary parts and remove and whitespace
             orignalCCode = fixString2(orignalCCode);
 
             // split code into lines and create result where the lengthy code will be stored
             string[] cCode = orignalCCode.Split('\n', ';');
             string result = "";
-
-            /*
-            for (int i = 0; i < cCode.Length; i++)
-            {
-                result += cCode[i];
-                result += "\r\n";
-            }
-            */
 
             // loop though all of the lines of code
             for (int i = 0; i < cCode.Length; i++)
@@ -394,8 +412,10 @@ namespace Lengthy
                         result += " ";
                     }
                 }
+                // add a newline character at the end of the line
                 result += "\r\n";
             }
+            // return the result which is the converted C code in lengthy format
             return result;
         }
     }
