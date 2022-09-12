@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainCodeEditor = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNew = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,18 +38,10 @@
             this.menuCompile = new System.Windows.Forms.ToolStripMenuItem();
             this.macrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cConverterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.LineNumberTextBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // mainCodeEditor
-            // 
-            this.mainCodeEditor.Location = new System.Drawing.Point(12, 27);
-            this.mainCodeEditor.Multiline = true;
-            this.mainCodeEditor.Name = "mainCodeEditor";
-            this.mainCodeEditor.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.mainCodeEditor.Size = new System.Drawing.Size(776, 411);
-            this.mainCodeEditor.TabIndex = 0;
-            this.mainCodeEditor.WordWrap = false;
             // 
             // menuStrip1
             // 
@@ -79,28 +70,28 @@
             // menuNew
             // 
             this.menuNew.Name = "menuNew";
-            this.menuNew.Size = new System.Drawing.Size(224, 26);
+            this.menuNew.Size = new System.Drawing.Size(128, 26);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
             // 
             // menuOpen
             // 
             this.menuOpen.Name = "menuOpen";
-            this.menuOpen.Size = new System.Drawing.Size(224, 26);
+            this.menuOpen.Size = new System.Drawing.Size(128, 26);
             this.menuOpen.Text = "Open";
             this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
             // 
             // menuSave
             // 
             this.menuSave.Name = "menuSave";
-            this.menuSave.Size = new System.Drawing.Size(224, 26);
+            this.menuSave.Size = new System.Drawing.Size(128, 26);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(224, 26);
+            this.menuExit.Size = new System.Drawing.Size(128, 26);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 
@@ -115,7 +106,7 @@
             // menuCompile
             // 
             this.menuCompile.Name = "menuCompile";
-            this.menuCompile.Size = new System.Drawing.Size(224, 26);
+            this.menuCompile.Size = new System.Drawing.Size(148, 26);
             this.menuCompile.Text = "Compile";
             this.menuCompile.Click += new System.EventHandler(this.menuCompile_Click);
             // 
@@ -130,20 +121,49 @@
             // cConverterToolStripMenuItem
             // 
             this.cConverterToolStripMenuItem.Name = "cConverterToolStripMenuItem";
-            this.cConverterToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cConverterToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
             this.cConverterToolStripMenuItem.Text = "C Converter";
             this.cConverterToolStripMenuItem.Click += new System.EventHandler(this.cConverterToolStripMenuItem_Click);
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(42, 31);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(746, 407);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
+            this.richTextBox1.VScroll += new System.EventHandler(this.richTextBox1_VScroll);
+            this.richTextBox1.FontChanged += new System.EventHandler(this.richTextBox1_FontChanged);
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // LineNumberTextBox
+            // 
+            this.LineNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LineNumberTextBox.Location = new System.Drawing.Point(0, 31);
+            this.LineNumberTextBox.Name = "LineNumberTextBox";
+            this.LineNumberTextBox.ReadOnly = true;
+            this.LineNumberTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.LineNumberTextBox.Size = new System.Drawing.Size(43, 407);
+            this.LineNumberTextBox.TabIndex = 3;
+            this.LineNumberTextBox.Text = "";
+            this.LineNumberTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LineNumberTextBox_MouseDown);
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.mainCodeEditor);
+            this.Controls.Add(this.LineNumberTextBox);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximumSize = new System.Drawing.Size(818, 497);
+            this.MinimumSize = new System.Drawing.Size(818, 497);
             this.Name = "mainWindow";
             this.Text = "Lenghty Code";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -152,8 +172,6 @@
         }
 
         #endregion
-
-        private TextBox mainCodeEditor;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private ToolStripMenuItem menuNew;
@@ -164,5 +182,7 @@
         private ToolStripMenuItem menuCompile;
         private ToolStripMenuItem macrosToolStripMenuItem;
         private ToolStripMenuItem cConverterToolStripMenuItem;
+        private RichTextBox richTextBox1;
+        private RichTextBox LineNumberTextBox;
     }
 }
