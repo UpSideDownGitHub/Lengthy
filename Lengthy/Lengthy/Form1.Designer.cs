@@ -127,11 +127,13 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(42, 31);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richTextBox1.Location = new System.Drawing.Point(54, 28);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(746, 407);
+            this.richTextBox1.Size = new System.Drawing.Size(746, 422);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
+            this.richTextBox1.WordWrap = false;
             this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.VScroll += new System.EventHandler(this.richTextBox1_VScroll);
             this.richTextBox1.FontChanged += new System.EventHandler(this.richTextBox1_FontChanged);
@@ -140,13 +142,16 @@
             // LineNumberTextBox
             // 
             this.LineNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LineNumberTextBox.Location = new System.Drawing.Point(0, 31);
+            this.LineNumberTextBox.Dock = System.Windows.Forms.DockStyle.Left;
+            this.LineNumberTextBox.Location = new System.Drawing.Point(0, 28);
             this.LineNumberTextBox.Name = "LineNumberTextBox";
             this.LineNumberTextBox.ReadOnly = true;
             this.LineNumberTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumberTextBox.Size = new System.Drawing.Size(43, 407);
+            this.LineNumberTextBox.Size = new System.Drawing.Size(43, 422);
             this.LineNumberTextBox.TabIndex = 3;
             this.LineNumberTextBox.Text = "";
+            this.LineNumberTextBox.WordWrap = false;
+            this.LineNumberTextBox.TextChanged += new System.EventHandler(this.LineNumberTextBox_TextChanged);
             this.LineNumberTextBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LineNumberTextBox_MouseDown);
             // 
             // mainWindow

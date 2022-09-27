@@ -161,18 +161,20 @@ namespace Lengthy
 
             return w;
         }
-
         public void AddLineNumbers()
         {
             // create & set Point pt to (0,0)    
             Point pt = new Point(0, 0);
+
             // get First Index & First Line from richTextBox1    
             int First_Index = richTextBox1.GetCharIndexFromPosition(pt);
             int First_Line = richTextBox1.GetLineFromCharIndex(First_Index);
+
             // set X & Y coordinates of Point pt to ClientRectangle Width & Height respectively    
             pt.X = ClientRectangle.Width;
             pt.Y = ClientRectangle.Height;
-            // get Last Index & Last Line from richTextBox1    
+
+            // get Last Index & Last Line from richTextBox1
             int Last_Index = richTextBox1.GetCharIndexFromPosition(pt);
             int Last_Line = richTextBox1.GetLineFromCharIndex(Last_Index);
             // set Center alignment to LineNumberTextBox    
@@ -181,10 +183,9 @@ namespace Lengthy
             LineNumberTextBox.Text = "";
             LineNumberTextBox.Width = getWidth();
             // now add each line number to LineNumberTextBox upto last line    
-            //                                     | + 2
-            for (int i = First_Line; i <= Last_Line + 2; i++)
+            for (int i = First_Line + 1; i <= Last_Line + 2; i++)
             {
-                LineNumberTextBox.Text += i + 1 + "\n";
+                LineNumberTextBox.Text += i + "\n";
             }
         }
 
@@ -195,32 +196,40 @@ namespace Lengthy
             AddLineNumbers();
         }
 
-        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
-        {
-            Point pt = richTextBox1.GetPositionFromCharIndex(richTextBox1.SelectionStart);
-            if (pt.X == 1)
-            {
-                AddLineNumbers();
-            }
-        }
-
-        private void richTextBox1_VScroll(object sender, EventArgs e)
+        public void TestFunction()
         {
             LineNumberTextBox.Text = "";
             AddLineNumbers();
             LineNumberTextBox.Invalidate();
         }
 
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+        {
+            Point pt = richTextBox1.GetPositionFromCharIndex(richTextBox1.SelectionStart);
+            if (pt.X == 1)
+            {
+                //AddLineNumbers();
+                TestFunction();
+            }
+        }
+
+        private void richTextBox1_VScroll(object sender, EventArgs e)
+        {
+            TestFunction();
+        }
+
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            AddLineNumbers();
+            //AddLineNumbers();
+            TestFunction();
         }
 
         private void richTextBox1_FontChanged(object sender, EventArgs e)
         {
             LineNumberTextBox.Font = richTextBox1.Font;
             richTextBox1.Select();
-            AddLineNumbers();
+            //AddLineNumbers();
+            TestFunction();
         }
 
         private void LineNumberTextBox_MouseDown(object sender, MouseEventArgs e)
@@ -231,7 +240,13 @@ namespace Lengthy
 
         private void Form1_Resize(object sender, EventArgs e)
         {
-            AddLineNumbers();
+            //AddLineNumbers();
+            TestFunction();        
+        }
+
+        private void LineNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
