@@ -52,7 +52,8 @@
             this.macrosToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -64,34 +65,34 @@
             this.menuSave,
             this.menuExit});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // menuNew
             // 
             this.menuNew.Name = "menuNew";
-            this.menuNew.Size = new System.Drawing.Size(128, 26);
+            this.menuNew.Size = new System.Drawing.Size(103, 22);
             this.menuNew.Text = "New";
             this.menuNew.Click += new System.EventHandler(this.menuNew_Click);
             // 
             // menuOpen
             // 
             this.menuOpen.Name = "menuOpen";
-            this.menuOpen.Size = new System.Drawing.Size(128, 26);
+            this.menuOpen.Size = new System.Drawing.Size(103, 22);
             this.menuOpen.Text = "Open";
             this.menuOpen.Click += new System.EventHandler(this.menuOpen_Click);
             // 
             // menuSave
             // 
             this.menuSave.Name = "menuSave";
-            this.menuSave.Size = new System.Drawing.Size(128, 26);
+            this.menuSave.Size = new System.Drawing.Size(103, 22);
             this.menuSave.Text = "Save";
             this.menuSave.Click += new System.EventHandler(this.menuSave_Click);
             // 
             // menuExit
             // 
             this.menuExit.Name = "menuExit";
-            this.menuExit.Size = new System.Drawing.Size(128, 26);
+            this.menuExit.Size = new System.Drawing.Size(103, 22);
             this.menuExit.Text = "Exit";
             this.menuExit.Click += new System.EventHandler(this.menuExit_Click);
             // 
@@ -100,13 +101,13 @@
             this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuCompile});
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
-            this.runToolStripMenuItem.Size = new System.Drawing.Size(48, 24);
+            this.runToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.runToolStripMenuItem.Text = "Run";
             // 
             // menuCompile
             // 
             this.menuCompile.Name = "menuCompile";
-            this.menuCompile.Size = new System.Drawing.Size(148, 26);
+            this.menuCompile.Size = new System.Drawing.Size(119, 22);
             this.menuCompile.Text = "Compile";
             this.menuCompile.Click += new System.EventHandler(this.menuCompile_Click);
             // 
@@ -115,22 +116,23 @@
             this.macrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cConverterToolStripMenuItem});
             this.macrosToolStripMenuItem.Name = "macrosToolStripMenuItem";
-            this.macrosToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.macrosToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.macrosToolStripMenuItem.Text = "Macros";
             // 
             // cConverterToolStripMenuItem
             // 
             this.cConverterToolStripMenuItem.Name = "cConverterToolStripMenuItem";
-            this.cConverterToolStripMenuItem.Size = new System.Drawing.Size(169, 26);
+            this.cConverterToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.cConverterToolStripMenuItem.Text = "C Converter";
             this.cConverterToolStripMenuItem.Click += new System.EventHandler(this.cConverterToolStripMenuItem_Click);
             // 
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(54, 28);
+            this.richTextBox1.Location = new System.Drawing.Point(49, 24);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(746, 422);
+            this.richTextBox1.Size = new System.Drawing.Size(653, 320);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
@@ -141,13 +143,13 @@
             // 
             // LineNumberTextBox
             // 
-            this.LineNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.LineNumberTextBox.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LineNumberTextBox.Location = new System.Drawing.Point(0, 28);
+            this.LineNumberTextBox.Location = new System.Drawing.Point(0, 24);
+            this.LineNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.LineNumberTextBox.Name = "LineNumberTextBox";
             this.LineNumberTextBox.ReadOnly = true;
             this.LineNumberTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.LineNumberTextBox.Size = new System.Drawing.Size(43, 422);
+            this.LineNumberTextBox.Size = new System.Drawing.Size(38, 320);
             this.LineNumberTextBox.TabIndex = 3;
             this.LineNumberTextBox.Text = "";
             this.LineNumberTextBox.WordWrap = false;
@@ -156,15 +158,16 @@
             // 
             // mainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(702, 344);
             this.Controls.Add(this.LineNumberTextBox);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(818, 497);
-            this.MinimumSize = new System.Drawing.Size(818, 497);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximumSize = new System.Drawing.Size(718, 383);
+            this.MinimumSize = new System.Drawing.Size(718, 383);
             this.Name = "mainWindow";
             this.Text = "Lenghty Code";
             this.Load += new System.EventHandler(this.Form1_Load);
